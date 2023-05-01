@@ -11,7 +11,8 @@ library(activatr)
 filename <- system.file(
   "extdata",
   "running_example.gpx.gz",
-  package = "activatr")
+  package = "activatr"
+)
 
 df <- parse_gpx(filename)
 
@@ -40,7 +41,7 @@ ggplot(filter(df, as.numeric(pace) < 1200)) +
   ylab("pace")
 ggplot(filter(df, as.numeric(pace) < 1200)) +
   geom_line(aes(x = time, y = as.numeric(pace)), color = "blue") +
-  scale_y_reverse(label=pace_formatter) +
+  scale_y_reverse(label = pace_formatter) +
   ylab("pace")
 
 ## ----leadlag, warning = FALSE, message = FALSE--------------------------------
@@ -48,6 +49,6 @@ df <- mutate_with_speed(df, lead = 10, lag = 10)
 df$pace <- speed_to_mile_pace(df$speed)
 ggplot(filter(df, as.numeric(pace) < 1200)) +
   geom_line(aes(x = time, y = as.numeric(pace)), color = "blue") +
-  scale_y_reverse(label=pace_formatter) +
+  scale_y_reverse(label = pace_formatter) +
   ylab("pace")
 

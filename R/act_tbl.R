@@ -80,12 +80,11 @@ is_act_tbl <- function(act_tbl) {
 #' @return \code{summary.act_tbl} returns a tibble with a single row,
 #'         containing a summary of the given \code{act_tbl}.
 #' @importFrom dplyr lag mutate pull slice
-#' @importFrom lubridate as.duration
-#' @importFrom timetk slidify
+#' @importFrom lubridate as.duration dseconds
+#' @importFrom slider slide_index_dbl
 #' @importFrom tibble tribble
 #' @rdname act_tbl
-summary.act_tbl <- function(
-                            object,
+summary.act_tbl <- function(object,
                             full = FALSE,
                             units = c("imperial", "metric"),
                             ...) {
@@ -159,15 +158,16 @@ summary.act_tbl <- function(
   # If we have elevation, add AvgElev, ElevGain and ElevLoss
   if ("ele" %in% colnames(object)) {
     # We use a rolling 30 second average of elevation to smooth out jitter.
-    period <- min(30, nrow(object))
+    period <- dseconds(min(15, nrow(object)))
     elev_df <- object %>%
       mutate(
-        ele = slidify(
+        ele = slide_index_dbl(
+          .data$ele,
+          .data$time,
           mean,
-          .period = period,
-          .align = "center",
-          .partial = TRUE
-        )(.data$ele)
+          .before = period,
+          .after = period
+        )
       ) %>%
       mutate(
         elevdelta = .data$ele - lag(.data$ele),

@@ -11,7 +11,8 @@ library(activatr)
 filename <- system.file(
   "extdata",
   "running_example.gpx.gz",
-  package = "activatr")
+  package = "activatr"
+)
 
 df <- parse_gpx(filename)
 
@@ -26,7 +27,7 @@ knitr::kable(summary(df))
 
 ## ----basicplot, warning = FALSE-----------------------------------------------
 library(ggplot2)
-qplot(lon, lat, data=df)
+qplot(lon, lat, data = df)
 
 ## ----mapplot_display, eval = FALSE--------------------------------------------
 #  ggmap::ggmap(get_ggmap_from_df(df)) + theme_void()

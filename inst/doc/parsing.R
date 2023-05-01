@@ -11,7 +11,8 @@ library(activatr)
 filename <- system.file(
   "extdata",
   "running_example.gpx.gz",
-  package = "activatr")
+  package = "activatr"
+)
 
 df <- parse_gpx(filename)
 
