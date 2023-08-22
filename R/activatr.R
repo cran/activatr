@@ -8,13 +8,15 @@
 #'
 #' @docType package
 #' @name activatr
-NULL
+#' @keywords internal
+"_PACKAGE"
 
 release_questions <- function() {
   c(
     "Have you run lintr::lint_package()?",
     "Have you run covr::report()?",
     "Have you run devtools::spell_check()?",
-    "Have you run styler::style_pkg()?"
+    "Have you run styler::style_pkg()?",
+    "Have you run devtools::build_readme()?"
   )
 }

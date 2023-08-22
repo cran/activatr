@@ -36,13 +36,10 @@ library(ggplot2)
 library(dplyr)
 library(lubridate)
 ggplot(filter(df, as.numeric(pace) < 1200)) +
-  geom_line(aes(x = time, y = as.numeric(pace)), color = "blue") +
-  scale_y_reverse() +
-  ylab("pace")
+  geom_line(aes(x = time, y = as.numeric(pace)), color = "blue")
 ggplot(filter(df, as.numeric(pace) < 1200)) +
   geom_line(aes(x = time, y = as.numeric(pace)), color = "blue") +
-  scale_y_reverse(label = pace_formatter) +
-  ylab("pace")
+  scale_y_reverse(label = pace_formatter)
 
 ## ----leadlag, warning = FALSE, message = FALSE--------------------------------
 df <- mutate_with_speed(df, lead = 10, lag = 10)
@@ -50,5 +47,6 @@ df$pace <- speed_to_mile_pace(df$speed)
 ggplot(filter(df, as.numeric(pace) < 1200)) +
   geom_line(aes(x = time, y = as.numeric(pace)), color = "blue") +
   scale_y_reverse(label = pace_formatter) +
-  ylab("pace")
+  xlab("Time") +
+  ylab("Pace")
 
