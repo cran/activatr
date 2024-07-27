@@ -1,3 +1,9 @@
+# activatr 0.2.1
+
+## Other Improvements
+
+* Remove `lintr` and `styler` as dependencies (#17).
+
 # activatr 0.2.0
 
 ## Breaking Changes
